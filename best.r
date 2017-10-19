@@ -1,5 +1,3 @@
-coursera <- "C:/users/renee/desktop/coursera_hollie" #change this to the folder where you downloaded the files
-setwd(coursera) #this just changes the working directory to the place where the files are
 outcomes <- read.csv("outcome-of-care-measures.csv", colClasses = "character") #this reads in the file
 colnames(outcomes) #view the column names
 head(outcomes) #view the first 5 rows of data
