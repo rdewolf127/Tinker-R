@@ -1,3 +1,17 @@
+coursera <- "C:/users/renee/desktop/coursera_hollie" #change this to the folder where you downloaded the files
+setwd(coursera) #this just changes the working directory to the place where the files are
+outcomes <- read.csv("outcome-of-care-measures.csv", colClasses = "character") #this reads in the file
+
+#rename the three outcomes we want to use to easier names so we can call them by name
+names(outcomes)[23]<-"pneumonia" 
+names(outcomes)[11]<- "heart_attack" 
+names(outcomes)[17]<-"heart_failure" 
+
+#change the data type of the outcomes columns to numeric so we can do calculations on them
+outcomes[,"pneumonia"] <- as.numeric(outcomes[,"pneumonia"])
+outcomes[,"heart_attack"] <- as.numeric(outcomes[,"heart_attack"])
+outcomes[,"heart_failure"] <- as.numeric(outcomes[,"heart_failure"])
+
 #build the function to take a state name and an outcome and return the state with the best(lowest) value for that outcome
 rankhospital <- function(state,outcome, rank) {  
   #create lists of valid states and outcomes for your validation
