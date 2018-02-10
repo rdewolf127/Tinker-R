@@ -42,7 +42,7 @@ kurtosis(melanoma$age)
 skewness(melanoma$age)
 
 #bin age to make it a factor
-install.packages('binr')
+#install.packages('binr')
 library('binr')
 
 bins.quantiles(melanoma$age, 5,5)
@@ -85,12 +85,17 @@ drops <- c("time","status", "sex", "age", "thickness", "ulcer", "year", "patient
 melanoma_assoc <- melanoma[ , !(names(melanoma) %in% drops)]
 
 #install an association analysis package
-install.packages('arules')
+#install.packages('arules')
 library('arules')
+
+#install.packages('arulesViz')
+library('arulesViz')
 
 #use apriori to run the association analysis
 rules <- apriori(melanoma_assoc)
+summary(rules)
 inspect(rules)
+
 
 #sort by lift and limit to only alive or dead via melanoma patients
 rules <- apriori(melanoma_assoc, parameter = list(minlen=2, supp=.005, conf=.8), appearance = list(rhs=c("status_factor=alive", "status_factor=died_melanoma"), default="lhs"), control = list(verbose=F))
@@ -105,4 +110,13 @@ which(redundant)
 
 #prune redundant rules
 rules.pruned <- rules.sorted[!redundant]
+summary(rules.pruned)
 inspect(rules.pruned)
+
+plot(rules.pruned)
+
+top_rules <- rules.pruned[1:6]
+
+plot(top_rules, method="graph", control=list(type="items"))
+
+plot(top_rules, method="paracoord", control=list(reorder=TRUE))
