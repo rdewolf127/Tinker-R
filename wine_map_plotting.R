@@ -30,7 +30,7 @@ ggplot(wine_R, aes(points, price)) + geom_point(aes(color = country)) +
 
 poi_subset <- read_csv("C:/Users/santo/github/Tinker-R/poi_subset.csv")
 
-ggmap::register_google(key = "AIzaSyDx_56XkqRInj18QGbUmbzjjyLvUr3bRoA")
+ggmap::register_google(key = "REDACTED")
 ts_center = as.numeric(geocode("Times Square"))
 
 NYCMap2 <- ggmap(get_googlemap(center = ts_center,
@@ -104,7 +104,7 @@ print(p)
 #Bing Map
 library(RgoogleMaps)
 
-key <- 'AsppdTdK3H0hLGop9PBsdyNM3GdtBVi9sFbNOqq9F1DNlmOJ1J4G-F-S9VwSoCXt'
+key <- 'REDACTED'
 
 
 map1=GetBingMap(center=c(40.75890,-73.98513 ),zoom=13,apiKey=key, 
