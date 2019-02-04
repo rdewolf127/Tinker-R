@@ -74,17 +74,6 @@ ts_hybrid_map + geom_point(aes(x=lon, y=lat),
   geom_encircle(aes(x=lon, y=lat),
                 data = places_loc, size = 1, color = "blue")
 
-#OSM Map
-library(OpenStreetMap)
-library(maps)
-require(maps)
-require(ggplot2)
-mp <- openmap(c(40.814119593752956,-74.0380305496094),
-              c(40.69552753081169,-73.93640701445315),12,"osm")
-
-
-plot(mp)
-
 #OPen Street Map
 library("ggmap")
 map <- get_map(location = c(lon[1], lat[2], lon[2], lat[1]),
