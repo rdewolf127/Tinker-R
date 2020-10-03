@@ -6,7 +6,7 @@ mydata <- read.csv('c:/users/renee/desktop/srasbystate.csv', colClasses = c("cha
 head(mydata)
 
 #load in the state lat/lon file
-statelatlon <- read.csv('c:/users/renee/desktop/statelatlon.csv', colClasses = c("character", "numeric", "numeric"))
+statelatlon <- read.csv('c:/users/santo/github/DataVisualization611/DataVisualization611/statelatlon.csv')
 head(statelatlon)
 
 mydata <- merge(mydata, statelatlon, by="State")
