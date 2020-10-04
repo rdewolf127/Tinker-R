@@ -1,0 +1,62 @@
+---
+title: "FRED Correlations"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+#  install.packages("BiocManager")
+
+#BiocManager::install("graph")
+
+#install.packages("PairViz")
+
+suppressPackageStartupMessages(library(PairViz))
+fred <- read.csv("C:/users/santo/desktop/fred_factors.csv", header = TRUE)
+data <- fred[,c(2:7)]
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### 
+
+```{r}
+corw <- as.dist(cor(data))
+o <- eulerian(-corw)
+corw <- dist2edge(corw)
+edgew <- cbind(corw*(corw>0), corw*(corw<0))
+par(cex.axis=.4)
+guided_pcp(data,edgew, path=o,pcp.col="grey50" ,lwd=2,
+           main="Weighted eulerian with correlation guide",
+           bar.col = c("lightcyan1","lightpink1"),
+           bar.ylim=c(-1,1),bar.axes=TRUE)
+
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### 
+
+```{r}
+pcp(data,horizontal=TRUE,lwd=2, col="grey50",
+    main = "Standard PCP")
+```
+
+### 
+
+```{r}
+o <- hpaths(1:ncol(data),matrix=FALSE)
+par(cex.axis=.4)
+pcp(data,order=o,horizontal=TRUE,lwd=2, col="grey50",
+    main = "Hamiltonian decomposition")
+
+
+```
+
